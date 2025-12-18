@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:laundryapp/app/app_shell.dart';
 import 'package:laundryapp/features/auth/presentation/providers/auth_providers.dart';
-import 'package:laundryapp/features/orders/presentation/pages/orders_page.dart';
 
 class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
@@ -41,7 +41,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     ref.listen<AuthState>(authNotifierProvider, (previous, next) {
       if (previous?.isAuthenticated == false && next.isAuthenticated) {
         Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => const OrdersPage()),
+          MaterialPageRoute(builder: (_) => const AppShell()),
           (route) => false,
         );
       }

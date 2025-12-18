@@ -5,4 +5,5 @@ class AppConfig {
   static const String ordersPath = 'orders';
   static const String loginPath = 'api/login';
   static const String registerPath = 'api/register';
+  static const String profilePath = 'api/profile';
 }

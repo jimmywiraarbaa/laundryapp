@@ -11,18 +11,25 @@ class ApiClient {
   final String baseUrl;
   final http.Client _client;
 
-  Future<dynamic> getJson(String path) async {
+  Future<dynamic> getJson(
+    String path, {
+    Map<String, String>? headers,
+  }) async {
     final response = await _client.get(
       _buildUri(path),
-      headers: _headers(),
+      headers: _mergeHeaders(headers),
     );
     return _decodeResponse(response);
   }
 
-  Future<dynamic> postJson(String path, {Object? body}) async {
+  Future<dynamic> postJson(
+    String path, {
+    Object? body,
+    Map<String, String>? headers,
+  }) async {
     final response = await _client.post(
       _buildUri(path),
-      headers: _headers(),
+      headers: _mergeHeaders(headers),
       body: body == null ? null : jsonEncode(body),
     );
     return _decodeResponse(response);
@@ -33,9 +40,19 @@ class ApiClient {
   }
 
   Map<String, String> _headers() {
-    return const {
+    return {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+    };
+  }
+
+  Map<String, String> _mergeHeaders(Map<String, String>? headers) {
+    if (headers == null || headers.isEmpty) {
+      return _headers();
+    }
+    return {
+      ..._headers(),
+      ...headers,
     };
   }
 

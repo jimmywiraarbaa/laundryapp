@@ -12,7 +12,7 @@ class OrdersPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Laundry Orders'),
+        title: const Text('Laundry'),
         actions: [
           IconButton(
             onPressed: () => ref.read(ordersNotifierProvider.notifier).refresh(),
